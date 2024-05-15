@@ -15,9 +15,9 @@ const pool = mysql
 export async function allusers() {
   try {
     const [result] = await pool.query("SELECT * FROM users");
-    console.log(result);
+    return result;
   } catch (e) {
-    console.log("Error Happend - " + e);
+    return e;
   }
 }
 
@@ -26,9 +26,9 @@ export async function getuser(userid) {
     const [result] = await pool.query("SELECT * FROM users WHERE id = ?", [
       userid,
     ]);
-    console.log(result);
+    return result;
   } catch (e) {
-    console.log("Error happend - " + e);
+    return e;
   }
 }
 
@@ -39,9 +39,9 @@ export async function createuser(fname, lname, email, pwd) {
       [fname, lname, email, pwd]
     );
 
-    console.log("user Registerd Sucessfully");
+    return "user Registerd Sucessfully";
   } catch (e) {
-    console.log("Can not Register user " + e);
+    return e;
   }
 }
 
@@ -49,23 +49,18 @@ export async function deleteuser(id) {
   try {
     await pool.query("DELETE FROM users WHERE id = ?", [id]);
 
-    console.log("User Deleted sucessfully");
+    return "User Deleted sucessfully";
   } catch (e) {
-    console.log("Can not Delete the user - " + e);
+    return e;
   }
 }
 
-async function updateemail(newemail, id) {
+export async function updateemail(newemail, id) {
   try {
     await pool.query("UPDATE users SET email = ? WHERE id = ?", [newemail, id]);
 
-    console.log("Email updated Sucessfully");
+    return "Email updated Sucessfully";
   } catch (e) {
-    console.log("Can not update the email - " + e);
+    return e;
   }
 }
-
-// allusers();
-
-getuser(2);
-// createuser("JOnathan", "Belete", "JOnathan@yahoo.com", "234234");
