@@ -1,0 +1,4 @@
+HOST = "Your host IP"
+USER = "database user"
+PASSWORD = "password"
+DATABASE = "Databse Name"
