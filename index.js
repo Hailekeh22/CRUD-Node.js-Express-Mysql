@@ -7,7 +7,13 @@ import {
   getuser,
   updateemail,
 } from "./database.js";
-import { createCourse, createUser, findUserByName } from "./Sequlizecontrol.js";
+import {
+  createCourse,
+  createUser,
+  findUserByName,
+  deleteUser,
+  updateName,
+} from "./Sequlizecontrol.js";
 
 const app = express();
 
@@ -71,6 +77,27 @@ app.post("/finduser", async (req, res) => {
   const name = req.body.name;
   const result = await findUserByName(name);
   res.json(result.firstname + " " + result.lastname);
+});
+
+app.post("/deleteuser", async (req, res) => {
+  const name = req.body.name;
+  const result = await deleteUser(name);
+  if (result) {
+    res.json(result);
+    console.log("Deleted Sucessfully");
+  } else res.send("error happend");
+});
+
+app.put("/updateuser", async (req, res) => {
+  const name = req.body.name;
+  const newname = req.body.newname;
+  const result = await updateName(name, newname);
+  if (result) {
+    res.send(result);
+    console.log("Updated Sucessfully");
+  } else {
+    res.send("Error Heppend!");
+  }
 });
 
 app.listen(port, () => {

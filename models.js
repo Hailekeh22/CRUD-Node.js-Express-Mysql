@@ -1,23 +1,23 @@
-import { DataTypes, Sequelize } from "sequelize";
+import { Sequelize } from "sequelize";
 import { sequelize } from "./usingSequelize.js";
 export const User = sequelize.define(
   "User",
   {
     firstname: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
     },
     lastname: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
     },
     email: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       unique: true,
     },
     password: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
     },
   },
