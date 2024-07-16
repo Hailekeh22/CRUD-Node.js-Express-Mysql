@@ -7,6 +7,7 @@ import {
   getuser,
   updateemail,
 } from "./database.js";
+import { createCourse, createUser, findUserByName } from "./Sequlizecontrol.js";
 
 const app = express();
 
@@ -47,6 +48,29 @@ app.post("/users/updateemail", async (req, res) => {
 
   const test = await updateemail(newemail, id);
   res.send(test);
+});
+
+app.post("/createcourse", async (req, res) => {
+  const name = req.body.name;
+  const college = req.body.college;
+  const result = await createCourse(name, college);
+  res.send(result);
+});
+
+app.post("/createuser", async (req, res) => {
+  const fname = req.body.fname;
+  const lname = req.body.lname;
+  const email = req.body.email;
+  const pwd = req.body.pwd;
+
+  const result = await createUser(fname, lname, email, pwd);
+  res.send(result);
+});
+
+app.post("/finduser", async (req, res) => {
+  const name = req.body.name;
+  const result = await findUserByName(name);
+  res.json(result.firstname + " " + result.lastname);
 });
 
 app.listen(port, () => {

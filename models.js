@@ -1,6 +1,6 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Sequelize } from "sequelize";
 import { sequelize } from "./usingSequelize.js";
-const User = sequelize.define(
+export const User = sequelize.define(
   "User",
   {
     firstname: {
@@ -27,3 +27,25 @@ const User = sequelize.define(
 );
 
 export default User;
+
+export const Course = sequelize.define("course", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  college: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+});
+
+//to create the tables in the database
+
+// sequelize.sync().then((res) => {
+//   console.log(res);
+// });
